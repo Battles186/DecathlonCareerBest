@@ -16,7 +16,7 @@ model fitting, and model evaluation.
 + `CI_matrix_graph_maker.r` is a Python script that generates graphs for the paper using Matplotlib and Seaborn.
 + `Makefile` is a Makefile that allows for the automated execution of each of the steps of the analysis. See "Replication" below.
 
-## Replicating
+## Replication
 
 To replicate the analysis performed in the article, one need only to utilize the provided Makefile. On most Linux terminals,
 this can be done as follows:
