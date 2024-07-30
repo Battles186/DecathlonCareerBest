@@ -6,7 +6,6 @@ This is the official GitHub repository for the paper _Predicting High-Performanc
 
 A brief tour of the repo:
 
-+ `dec_article_first_best_v14.pdf` is a copy of the final paper.
 + `DecData.csv` contains all of the raw data used in performing the analysis.
 + `preprocessing_first_best_dist_speed.py` is a Python script that filters the data to contain only marks from
 athletes that meet the specified criteria and creates athlete profiles.
