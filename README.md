@@ -29,7 +29,7 @@ As long as all the directory structure of the project is left intact, all script
 Importantly, the proper versions of Python and R and the attendant packages should be installed to ensure complete
 replication of results.
 
-### On \*nix Systems
+### \*nix Systems
 
 To replicate the analysis performed in the article, one need only to utilize the provided Makefile. In Bash/Zsh,
 this can be done as follows:
