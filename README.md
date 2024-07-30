@@ -26,6 +26,10 @@ Note: this analysis was performed using software with the following versions:
     - [Matplotlib](https://matplotlib.org/) 3.8.4
 + [R](https://www.r-project.org/) 4.4.1 (2024-06-14) -- "Race for Your Life"
 
+As long as all the directory structure of the project is left intact, all scripts should execute without any errors.
+Importantly, the proper versions of Python and R and the attendant packages should be installed to ensure complete
+replication of results.
+
 ### On \*nix Systems
 
 To replicate the analysis performed in the article, one need only to utilize the provided Makefile. In Bash/Zsh,
@@ -69,15 +73,7 @@ Finally, to generate plots, run:
 python CI_matrix_graph_maker.py
 ```
 
-__Note__: the following folder structure is required for this operation
-to succeed, as it does not create directories automatically.
-
-```
-Images
-└── gamma_analysis_r
-    └── first_delta_minus_outliers
-        ├── identity
-        ├── inverse
-        └── log
-```
+As mentioned above, the directory structure of the project should be left intact to ensure that all scripts execute without any errors.
+Importantly, the proper versions of Python and R and the attendant packages should be installed to ensure complete
+replication of results.
 
