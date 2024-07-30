@@ -45,6 +45,14 @@ Commands for `make` are as follows:
 + `r` performs data analysis in R.
 + `boot` generates bootstrapped confidence intervals for the difference in coefficient esimates.
 + `graphs` generates the figures shown in the paper.
+    - This script produces many graphs that display coefficient comparisons. Those that reflect the bootstrapped
+    confidence intervals are found at the following paths:
+        * `Images/gamma_analysis_r/first_delta_minus_outliers/log/boot_CI_matrix_first.png`
+        * `Images/gamma_analysis_r/first_delta_minus_outliers/log/boot_CI_matrix_delta.png`
+        * `Images/gamma_analysis_r/first_delta_minus_outliers/inverse/boot_CI_matrix_first.png`
+        * `Images/gamma_analysis_r/first_delta_minus_outliers/inverse/boot_CI_matrix_delta.png`
+        * `Images/gamma_analysis_r/first_delta_minus_outliers/identity/boot_CI_matrix_first.png`
+        * `Images/gamma_analysis_r/first_delta_minus_outliers/identity/boot_CI_matrix_delta.png`
 
 ### Windows
 
