@@ -1,0 +1,11 @@
+"","Men_100_delta","Men_110h_delta","Men_400_delta","Men_LJ_delta","Men_HJ_delta","Men_PV_delta","Men_SP_delta","Men_DT_delta","Men_JT_delta","Men_1500_delta"
+"Men_100_delta",0,10,0,10,10,10,10,0,0,10
+"Men_110h_delta",-10,0,0,0,0,10,0,0,0,0
+"Men_400_delta",0,0,0,0,0,10,0,0,0,0
+"Men_LJ_delta",-10,0,0,0,0,0,0,-10,-10,0
+"Men_HJ_delta",-10,0,0,0,0,0,0,0,0,0
+"Men_PV_delta",-10,-10,-10,0,0,0,-10,-10,-10,0
+"Men_SP_delta",-10,0,0,0,0,10,0,0,0,0
+"Men_DT_delta",0,0,0,10,0,10,0,0,0,0
+"Men_JT_delta",0,0,0,10,0,10,0,0,0,0
+"Men_1500_delta",-10,0,0,0,0,0,0,0,-10,0

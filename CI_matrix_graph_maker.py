@@ -12,13 +12,15 @@ from matplotlib.patches import Patch
 import dec_util
 
 
-def heatmap(df, color_palette, cmap, title, path_out=None, show=False):
+def heatmap(df, color_palette, cmap, title, legend="", path_out=None, show=False, ax=None):
     """
     Creates a heatmap using the given DataFrame, color palette, color map,
     and title.
     """
-    # Create figure.
-    fig, ax = plt.subplots(figsize=(10, 10))
+    # Create figure if needed.
+    if ax is None:
+        fig, ax = plt.subplots(figsize=(10, 10))
+
     # Heatmap.
     sns.heatmap(
         df,
@@ -31,7 +33,7 @@ def heatmap(df, color_palette, cmap, title, path_out=None, show=False):
     # multiple ways for accessibility.
     range_plot = np.arange(len(df.columns) + 1)
     hatch_logical = np.ma.masked_not_equal(df.values, 10)
-    plt.pcolor(
+    ax.pcolor(
         range_plot, range_plot,
         hatch_logical,
         hatch="//", linewidth=30.0, alpha=0.0
@@ -40,8 +42,10 @@ def heatmap(df, color_palette, cmap, title, path_out=None, show=False):
     ax.xaxis.tick_top()
     plt.tick_params(left=False, bottom=False, top=False)
     tick_labels = [x.replace("Men ", "") for x in dec_util.events]
-    plt.xticks(ticks=[i + 0.5 for i in range(10)], labels=tick_labels, fontsize=16)
-    plt.yticks(ticks=[i + 0.5 for i in range(10)], labels=tick_labels, fontsize=16)
+    # plt.xticks(ticks=[i + 0.5 for i in range(10)], labels=tick_labels, fontsize=16)
+    # plt.yticks(ticks=[i + 0.5 for i in range(10)], labels=tick_labels, fontsize=16)
+    ax.set_xticks(ticks=[i + 0.5 for i in range(10)], labels=tick_labels, fontsize=16, rotation=90)
+    ax.set_yticks(ticks=[i + 0.5 for i in range(10)], labels=tick_labels, fontsize=16)
     # Custom legend.
     # legend_lines = [Line2D([0], [0], color=color_palette[0]),
     #                 Line2D([0], [0], color=color_palette[2]),
@@ -52,6 +56,8 @@ def heatmap(df, color_palette, cmap, title, path_out=None, show=False):
     # plt.legend(legend_lines, ["Row coefficient is Greater", "No Difference", "Column is coefficient Greater"])
     # plt.legend(handles=legend_elems, fontsize=14)
     # plt.title(title, fontsize=24)
+    ax.xaxis.set_label_position('bottom')
+    ax.set_xlabel(title, fontsize=24)
     if path_out is not None:
         plt.savefig(path_out)
     if show:
@@ -113,31 +119,52 @@ path_img_out = "Images/gamma_analysis_r/first_delta_minus_outliers/"
 #     "delta_identity": ""
 # }
 
-heatmap(df_log_first, color_palette=color_palette, cmap=cmap, title="FSB Features, Log Link", path_out=path_img_out + "log/lh_matrix_first.png")
-heatmap(df_inverse_first, color_palette=color_palette, cmap=cmap, title="FSB Features, Inverse Link", path_out=path_img_out + "inverse/lh_matrix_first.png")
-heatmap(df_identity_first, color_palette=color_palette, cmap=cmap, title="FSB Features, Identity Link", path_out=path_img_out + "identity/lh_matrix_first.png", show=True)
+heatmap(df_log_first, color_palette=color_palette, cmap=cmap, title="FSB Features, Log Link", path_out=path_img_out + "log/lh_matrix_first.png", show=False)
+heatmap(df_inverse_first, color_palette=color_palette, cmap=cmap, title="FSB Features, Inverse Link", path_out=path_img_out + "inverse/lh_matrix_first.png", show=False)
+heatmap(df_identity_first, color_palette=color_palette, cmap=cmap, title="FSB Features, Identity Link", path_out=path_img_out + "identity/lh_matrix_first.png", show=False)
 
 # Delta heatmaps.
-heatmap(df_log_delta, color_palette=color_palette, cmap=cmap, title="Delta Features, Log Link", path_out=path_img_out + "log/lh_matrix_delta.png")
-heatmap(df_inverse_delta, color_palette=color_palette, cmap=cmap, title="Delta Features, Inverse Link", path_out=path_img_out + "inverse/lh_matrix_delta.png")
-heatmap(df_identity_delta, color_palette=color_palette, cmap=cmap, title="Delta Features, Identity Link", path_out=path_img_out + "identity/lh_matrix_delta.png")
+heatmap(df_log_delta, color_palette=color_palette, cmap=cmap, title="Delta Features, Log Link", path_out=path_img_out + "log/lh_matrix_delta.png", show=False)
+heatmap(df_inverse_delta, color_palette=color_palette, cmap=cmap, title="Delta Features, Inverse Link", path_out=path_img_out + "inverse/lh_matrix_delta.png", show=False)
+heatmap(df_identity_delta, color_palette=color_palette, cmap=cmap, title="Delta Features, Identity Link", path_out=path_img_out + "identity/lh_matrix_delta.png", show=False)
 
 # FSB heatmaps, CIs.
-heatmap(df_log_first_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Log Link", path_out=path_img_out + "log/CI_matrix_first.png")
-heatmap(df_inverse_first_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Inverse Link", path_out=path_img_out + "inverse/CI_matrix_first.png")
-heatmap(df_identity_first_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Identity Link", path_out=path_img_out + "identity/CI_matrix_first.png", show=True)
+heatmap(df_log_first_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Log Link", path_out=path_img_out + "log/CI_matrix_first.png", show=False)
+heatmap(df_inverse_first_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Inverse Link", path_out=path_img_out + "inverse/CI_matrix_first.png", show=False)
+heatmap(df_identity_first_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Identity Link", path_out=path_img_out + "identity/CI_matrix_first.png", show=False)
 
 # Delta heatmaps, CIs.
-heatmap(df_log_delta_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Log Link", path_out=path_img_out + "log/CI_matrix_delta.png")
-heatmap(df_inverse_delta_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Inverse Link", path_out=path_img_out + "inverse/CI_matrix_delta.png")
-heatmap(df_identity_delta_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Identity Link", path_out=path_img_out + "identity/CI_matrix_delta.png")
+heatmap(df_log_delta_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Log Link", path_out=path_img_out + "log/CI_matrix_delta.png", show=False)
+heatmap(df_inverse_delta_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Inverse Link", path_out=path_img_out + "inverse/CI_matrix_delta.png", show=False)
+heatmap(df_identity_delta_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Identity Link", path_out=path_img_out + "identity/CI_matrix_delta.png", show=False)
 
 # Heatmaps, boot CIs.
-heatmap(df_log_first_boot_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Log Link", path_out=path_img_out + "log/boot_CI_matrix_first.png")
-heatmap(df_inv_first_boot_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Inverse Link", path_out=path_img_out + "inverse/boot_CI_matrix_first.png")
-heatmap(df_ide_first_boot_CI, color_palette=color_palette, cmap=cmap, title="FSB Features, Identity Link", path_out=path_img_out + "identity/boot_CI_matrix_first.png")
+legend_first =\
+"""
+Figure 2: Matrix diagram showing significant differences between FSB coefficients. A hatched orange square indicates that the entirety of the bootstrapped confidence interval of the difference between the row coefficient and column coefficient is below zero, indicating the column coefficient is greater. A teal square indicates that the entire confidence interval is above 0, meaning that the row coefficient is greater. A grey square indicates that this interval contains 0, which means that neither one is significantly greater than the other.
+"""
 
-heatmap(df_log_delta_boot_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Log Link", path_out=path_img_out + "log/boot_CI_matrix_delta.png")
-heatmap(df_inv_delta_boot_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Inverse Link", path_out=path_img_out + "inverse/boot_CI_matrix_delta.png")
-heatmap(df_ide_delta_boot_CI, color_palette=color_palette, cmap=cmap, title="Delta Features, Identity Link", path_out=path_img_out + "identity/boot_CI_matrix_delta.png")
+legend_delta =\
+"""
+Figure 4: Matrix diagram showing significant differences between delta coefficients. A hatched orange square indicates that the entirety of the bootstrapped confidence interval of the difference between the row coefficient and column coefficient is below zero, indicating the column coefficient is greater. A teal square indicates that the entire confidence interval is above 0, meaning that the row coefficient is greater. A grey square indicates that this interval contains 0, which means that neither one is significantly greater than the other.
+"""
+
+fig, axs = plt.subplots(ncols=3, nrows=1, figsize=(18, 12))
+heatmap(df_log_first_boot_CI, color_palette=color_palette, cmap=cmap, title="(A) Log Link", ax=axs[0], show=False)
+heatmap(df_inv_first_boot_CI, color_palette=color_palette, cmap=cmap, title="(B) Inverse Link", ax=axs[1], show=False)
+heatmap(df_ide_first_boot_CI, color_palette=color_palette, cmap=cmap, title="(C) Identity Link", ax=axs[2], show=False)
+fig.text(0, -0.01, s=legend_first, fontsize=24, wrap=True)
+# plt.tight_layout(h_pad=5.0)
+# plt.suptitle("FSB Features", fontsize=24)
+plt.savefig(path_img_out + "boot_CI_matrix_first.png")
+
+fig, axs = plt.subplots(ncols=3, nrows=1, figsize=(18, 12))
+heatmap(df_log_delta_boot_CI, color_palette=color_palette, cmap=cmap, title="(A) Log Link", ax=axs[0], show=False)
+heatmap(df_inv_delta_boot_CI, color_palette=color_palette, cmap=cmap, title="(B) Inverse Link", ax=axs[1], show=False)
+heatmap(df_ide_delta_boot_CI, color_palette=color_palette, cmap=cmap, title="(C) Identity Link", ax=axs[2], show=False)
+fig.text(0, -0.01, s=legend_delta, fontsize=24, wrap=True)
+# plt.tight_layout(h_pad=5.0)
+# plt.margins(x=0.5, y=5.0)
+# plt.suptitle("Delta Features", fontsize=24)
+plt.savefig(path_img_out + "boot_CI_matrix_delta.png")
 

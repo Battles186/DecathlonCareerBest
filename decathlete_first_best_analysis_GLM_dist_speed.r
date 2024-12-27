@@ -814,7 +814,7 @@ print(coef_sorted_delta_identity)
 # Save some plots of these.
 
 path_img_out <- "Images/gamma_analysis_r/first_delta_minus_outliers/"
-margins = c(10, 10, 2, 2)
+margins = c(10, 8, 2, 2)
 
 ylim_log = c(-0.05, 0.05)
 ylim_log_abs = c(0, 0.025)
@@ -905,6 +905,7 @@ plot_model_coefs <- function(model, type="all", y_label="", y_label_line=4, ylim
 	# Plot the coefficients.
 	png(path_out, width=img_width, height=img_height)
 	par(mar=margins)
+	#bar_centers <- boxplot(
 	bar_centers <- barplot(
 			coefs_sorted,
 			ylim=ylim,
@@ -1371,6 +1372,32 @@ write.csv(lh_matr_ide_delta, file = "lh_matrix_ide_delta.csv")
 write.csv(dec_data_t_subset, "dec_data_t_subset_log.csv")
 write.csv(dec_data_t_subset_inverse, "dec_data_t_subset_inv.csv")
 write.csv(dec_data_t_subset_identity, "dec_data_t_subset_ide.csv")
+
+# Quick check: ensure that confidence intervals are the same with or without
+# specification of 0.95 level.
+identical(confint(mod_gamma_updated), confint(mod_gamma_updated, level = 0.95))
+# All good.
+
+# Check to see which p-values are large enough that we need to report them.
+p_vals_log <- summary(mod_gamma_updated)$coefficients[, 4]
+p_vals_inv <- summary(mod_gamma_inverse_updated)$coefficients[, 4]
+p_vals_ide <- summary(mod_gamma_identity_updated)$coefficients[, 4]
+print("Check to ensure all predictors are significantly related to outcome at p < 0.0001:")
+print("Log:")
+p_vals_log < 0.0001
+print("Inverse:")
+p_vals_inv < 0.0001
+print("Identity:")
+p_vals_ide < 0.0001
+# Get rounded forms of those values:
+print("Raw p values for Men's 100 Delta:")
+p_vals_log["Men_100_delta"]
+p_vals_inv["Men_100_delta"]
+p_vals_ide["Men_100_delta"]
+print("Rounded to 3 decimal places:")
+round(p_vals_log["Men_100_delta"], 3)
+round(p_vals_inv["Men_100_delta"], 3)
+round(p_vals_ide["Men_100_delta"], 3)
 
 ## Sources not already cited:
 ## Note: last time I copied history from elinks was 1/11/2024 at 2:44pm.
